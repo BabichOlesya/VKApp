@@ -23,27 +23,20 @@ class FriendsViewController: UITableViewController {
         super.viewDidLoad()
         title = "Друзья"
 
-        service.getFriends(token: session.token) { [self] users in
-            self.userFriends = users
-        
-            self.sortedFriends = self.sort(userFriends: userFriends)
-
-            self.tableView.reloadData()
-            
-        }
+//        service.getFriends(token: session.token) { [self] users in
+//            self.userFriends = users
+//        
+//            self.sortedFriends = self.sort(userFriends: userFriends)
+//
+//            self.tableView.reloadData()
+//            
+//        }
         
         func getFriends() {
-            let allUsers = realm.objects(User.self)
-            
-            if let users = allUsers.first?.realm {
-                
-//                self.userFriends = users
-//
-//                self.sortedFriends = self.sort(userFriends: userFriends)
-                self.userFriends = Array(users)
-                
-                self.tableView.reloadData()
-            }
+            let friends = realm.objects(User.self)
+            self.userFriends = Array(friends)
+            self.sortedFriends = self.sort(userFriends: userFriends)
+            self.tableView.reloadData()
         }
     }
 
