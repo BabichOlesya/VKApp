@@ -28,8 +28,8 @@ class User: Object, Decodable {
 //        self.birthDay = try container.decode(String?.self, forKey: .birthDay)
     }
 
-    @Persisted (primaryKey: true) var id: Int = 0
-//    @Persisted var id: Int = 0
+//    @Persisted (primaryKey: true) var id: Int = 0
+    @Persisted var id: Int = 0
     @Persisted var firstName: String = " "
     @Persisted var lastName: String = " "
     @Persisted var photoUser: String?
@@ -79,12 +79,13 @@ class Groups: Decodable {
 }
 
 class MyGroup: Object, Decodable {
-    @Persisted(primaryKey: true) var id: Int
+//    @Persisted(primaryKey: true) var id: Int
     @Persisted var name: String
     @Persisted var photoGroup: String?
 
     enum CodingKeys: String, CodingKey {
-        case id, name
+//        case id
+        case name
         case photoGroup = "photo_50"
     }
     

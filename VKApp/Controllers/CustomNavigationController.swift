@@ -19,14 +19,14 @@ class CustomNavigationController: UINavigationController, UINavigationController
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.delegate = self
+//        self.delegate = self
         
 //        let egdePanGR = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
 //        view.addGestureRecognizer(egdePanGR)
     }
     
     func navigationController(_ navigationController: UINavigationController,
-                              animationController operation: UINavigationController.Operation,
+                              animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch operation {

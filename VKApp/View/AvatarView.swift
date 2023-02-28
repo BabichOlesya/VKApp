@@ -22,10 +22,10 @@ class AvatarView: UIView {
         animateTap.numberOfTapsRequired = 1
         self.addGestureRecognizer(animateTap)
         
-//        shadowView.layer.shadowColor = UIColor.systemBlue.cgColor
-//        shadowView.layer.shadowOffset = .zero
-//        shadowView.layer.shadowRadius = 10
-//        shadowView.layer.shadowOpacity = 0.6
+        shadowView.layer.shadowColor = UIColor.systemBlue.cgColor
+        shadowView.layer.shadowOffset = .zero
+        shadowView.layer.shadowRadius = 10
+        shadowView.layer.shadowOpacity = 0.6
     }
     
     

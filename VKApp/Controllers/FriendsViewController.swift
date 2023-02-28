@@ -12,7 +12,7 @@ import RealmSwift
 class FriendsViewController: UITableViewController {
 
     let session = Session.sharedInstance
-    let service = Service()
+    let service = ServiceGetFriends()
     var userFriends = [User]()
     let realm = try! Realm()
     
@@ -22,22 +22,29 @@ class FriendsViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Друзья"
-
-//        service.getFriends(token: session.token) { [self] users in
-//            self.userFriends = users
-//        
-//            self.sortedFriends = self.sort(userFriends: userFriends)
-//
-//            self.tableView.reloadData()
-//            
-//        }
         
-        func getFriends() {
-            let friends = realm.objects(User.self)
-            self.userFriends = Array(friends)
+        let nib = UINib(nibName:"FriendsCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "FriendsCell")
+
+        service.getFriends(token: session.token) { [self] users in
+            self.userFriends = users
+
             self.sortedFriends = self.sort(userFriends: userFriends)
+
             self.tableView.reloadData()
+
         }
+        
+        getFriends()
+        
+
+    }
+    
+    func getFriends() {
+        let friends = realm.objects(User.self)
+        self.userFriends = Array(friends)
+        self.sortedFriends = self.sort(userFriends: userFriends)
+        self.tableView.reloadData()
     }
 
 
@@ -94,26 +101,27 @@ class FriendsViewController: UITableViewController {
     }
 
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "segueUserFriends",
-           let destination = segue.destination as? FriendPhotoViewController,
-           let indexPath = tableView.indexPathForSelectedRow {
-
-            destination.ownerId = userFriends[indexPath.row].id
-        }
-    }
-//    
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        performSegue(withIdentifier: "segueUserFriends", sender: indexPath)
-//    }
-//    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "segueUserFriends",
-//           let indexPath = sender as? IndexPath,
-//           let controller = segue.destination as? FriendPhotoViewController {
-//            controller.ownerId = userFriends[indexPath.row].id
+//           let destination = segue.destination as? FriendPhotoViewController,
+//           let indexPath = tableView.indexPathForSelectedRow {
+//
+//            destination.ownerId = userFriends[indexPath.row].id
 //        }
 //    }
+//
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "segueUserFriends", sender: indexPath)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segueUserFriends",
+           let indexPath = sender as? IndexPath,
+           let controller = segue.destination as? FriendPhotoViewController {
+            controller.ownerId = userFriends[indexPath.row].id
+        }
+    }
+
 
     /*
     // Override to support conditional editing of the table view.

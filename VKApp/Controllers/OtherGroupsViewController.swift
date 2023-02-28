@@ -9,7 +9,7 @@ import UIKit
 
 class OtherGroupsViewController: UITableViewController {
     let session = Session.sharedInstance
-    let service = Service()
+    let service = ServiceGetGroupBySearch()
     var otherGroups = [MyGroup]()
     
     var filtredGroups = [MyGroup]()

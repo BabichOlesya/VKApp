@@ -12,7 +12,7 @@ import SDWebImage
 class FriendPhotoViewController: UICollectionViewController {
     
     let session = Session.sharedInstance
-    let service = Service()
+    let service = ServiceGetPhotos()
     var userPhotos: [PhotoItem] = []
     var ownerId: Int!
 

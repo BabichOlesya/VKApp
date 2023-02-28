@@ -10,7 +10,6 @@ import UIKit
 class LoginViewController: UIViewController {
     
     let session = Session.sharedInstance
-    let service = Service()
     var contacts = [User]()
 
     @IBOutlet weak var loginTextField: UITextField!
@@ -37,9 +36,6 @@ class LoginViewController: UIViewController {
         loadingPointView2.layer.cornerRadius = loadingPointView2.frame.height / 2
         loadingPointView3.layer.cornerRadius = loadingPointView3.frame.height / 2
         
-
-
-//        service.getGroupsBySearch(token: session.token)
         
     }
     

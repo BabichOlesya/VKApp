@@ -10,7 +10,7 @@ import SDWebImage
 
 class GroupsViewController: UITableViewController {
     let session = Session.sharedInstance
-    let service = Service()
+    let service = ServiceGetGroups()
     var myGroups = [MyGroup]()
 
 
