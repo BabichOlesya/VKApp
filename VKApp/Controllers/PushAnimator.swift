@@ -8,23 +8,26 @@
 import UIKit
 
 class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     private let animationDuration: TimeInterval = 1
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        
         return animationDuration
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let source = transitionContext.viewController(forKey: .from),
-        let destination = transitionContext.viewController(forKey: .to) else { return }
-        
+              let destination = transitionContext.viewController(forKey: .to) else { return }
+
         transitionContext.containerView.addSubview(destination.view)
+
+        destination.view.layer.anchorPoint = CGPoint(x: 1, y: 0)
+
         source.view.frame = transitionContext.containerView.frame
         destination.view.frame = transitionContext.containerView.frame
-        
+
         destination.view.transform = CGAffineTransform(translationX: source.view.bounds.width, y: 0)
-        
+
         UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: .calculationModePaced, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 0.75, animations: {
                 let translation = CGAffineTransform(translationX: -200, y: 0)
@@ -49,29 +52,28 @@ class PushAnimator: NSObject, UIViewControllerAnimatedTransitioning {
 }
 
 class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
-    
+
     private let animationDuration: TimeInterval = 1
-    
+
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        
         return animationDuration
     }
-    
+
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         guard let source = transitionContext.viewController(forKey: .from),
         let destination = transitionContext.viewController(forKey: .to) else { return }
-        
+
         transitionContext.containerView.addSubview(destination.view)
         transitionContext.containerView.sendSubviewToBack(destination.view)
-        
+
         source.view.frame = transitionContext.containerView.frame
         destination.view.frame = transitionContext.containerView.frame
-        
+
         let translation = CGAffineTransform(translationX: -200, y: 0)
         let scale = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        
+
         destination.view.transform = translation.concatenating(scale)
-        
+
         UIView.animateKeyframes(withDuration: animationDuration, delay: 0, options: .calculationModePaced, animations: {
             UIView.addKeyframe(withRelativeStartTime: 0.25, relativeDuration: 0.75, animations: {
                 destination.view.transform = .identity
@@ -92,8 +94,5 @@ class PopAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             }
             transitionContext.completeTransition(finished && !transitionContext.transitionWasCancelled)
         }
-        
     }
-    
-
 }

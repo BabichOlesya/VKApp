@@ -7,19 +7,19 @@
 
 import UIKit
 
-class CustomIntteractiveTransition: UIPercentDrivenInteractiveTransition {
+class CustomInteractiveTransition: UIPercentDrivenInteractiveTransition {
     var hasStarted = false
     var shouldFinish = false
 }
 
 class CustomNavigationController: UINavigationController, UINavigationControllerDelegate {
     
-    let interactiveTransition = CustomIntteractiveTransition()
+    let interactiveTransition = CustomInteractiveTransition()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        self.delegate = self
+        self.delegate = self
         
 //        let egdePanGR = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
 //        view.addGestureRecognizer(egdePanGR)
@@ -36,7 +36,7 @@ class CustomNavigationController: UINavigationController, UINavigationController
             return PopAnimator()
         case .none:
             return nil
-        default:
+        @unknown default:
             return nil
         }
     }

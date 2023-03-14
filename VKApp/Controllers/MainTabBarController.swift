@@ -28,3 +28,14 @@ class MainTabBarController: UITabBarController {
     */
 
 }
+
+extension MainTabBarController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PushAnimator()
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PopAnimator()
+    }
+}

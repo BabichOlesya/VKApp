@@ -66,6 +66,9 @@ extension WebViewController: WKNavigationDelegate {
 
             
             mainVC = (UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TabbarMain")) as! MainTabBarController
+            mainVC.transitioningDelegate = mainVC
+
+            self.navigationController?.pushViewController(mainVC, animated: true)
             
             
             self.view.insertSubview((self.mainVC.view)!, at: 9)

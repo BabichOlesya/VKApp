@@ -34,23 +34,19 @@ class ServiceGetFriends{
             completion(contacts)
             
         }
-        
-        print(realm.configuration.fileURL)
     }
     
     private func saveToRealm(user: [User]){
         
         try! realm.write({
             realm.add(user)
-            print(self.realm.configuration.fileURL as Any)
         })
     }
-    
-    func readRealm(){
-        let realm = try! Realm()
-        
-        let user = realm.objects(User.self)
-        
-    }
+//    func readRealm(){
+//        let realm = try! Realm()
+//
+//        let user = realm.objects(User.self)
+//
+//    }
 }
     

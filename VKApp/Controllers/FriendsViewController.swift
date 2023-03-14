@@ -84,14 +84,9 @@ class FriendsViewController: UITableViewController {
         let firstChar = sortedFriends.keys.sorted()[indexPath.section]
         let friends = sortedFriends[firstChar]!
         let friend = friends[indexPath.row]
-
-        cell.userNameLabel.text = friend.lastName + " " + friend.firstName
-
-        if let photo = friend.photoUser {
-            cell.userImageView?.sd_setImage(with: URL(string: photo))
-        }
-
-        cell.userImageView.contentMode = .scaleAspectFill
+        
+        cell.user = friend
+        cell.setup()
 
         return cell
     }
@@ -168,4 +163,15 @@ class FriendsViewController: UITableViewController {
     }
     */
 
+}
+
+extension FriendsViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PushAnimator()
+    }
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return PopAnimator()
+    }
 }
